@@ -1,0 +1,24 @@
+main:
+    201d7ffc    // addi $sp, $zero, 32764    
+    2004000a    // addi $a0, $zero, 10
+    0c000004    // jal accm
+    08000013    // j   exit
+accm:
+    23bdfff8    // addi  $sp, $sp, -8
+    afbf0004    // sw    $ra, 4($sp)
+    afa40000    // sw    $a0, 0($sp)
+    28880001    // slti  $t0,$a0,1
+    11000003    // beq   $t0,$zero,L1
+    20020000    // addi  $v0,$zero,0
+    23bd0008    // addi  $sp,$sp,8
+    03e00008    // jr    $ra 
+L1:
+    2084ffff    // addi $a0,$a0,-1
+    0c000004    // jal accm 
+    8fa40000    // lw $a0, 0($sp)
+    8fbf0004    // lw $ra, 4($sp)
+    23bd0008    // addi $sp, $sp, 8
+    00821020    // add $v0, $a0, $v0
+    03e00008    // jr   $ra
+exit:
+    2009000a    // addi $t1, $zero, 10
